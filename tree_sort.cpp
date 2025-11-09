@@ -22,11 +22,13 @@ void PrintTreeNode(TreeNode_t *node) {
     fprintf(OUTPUT_FILE, " ) ");
 }
 
-void PrintTreeElements(Tree_t *tree) {
+int PrintTreeElements(Tree_t *tree) {
 
-    assert(tree);
+    Return_If_Tree_Error(tree)
 
     PrintTreeNode(tree->root);
+
+    Return_Tree_Error(tree);
 }
 
 Tree_t *TreeCtor(TreeElem_t root_value) {
@@ -72,7 +74,7 @@ void TreeNodeDtor(Tree_t *tree, TreeNode_t *node) {
 
 int InsertTreeElement(Tree_t *tree, TreeElem_t new_value) {
 
-    // Return_If_Tree_Error
+    Return_If_Tree_Error(tree)
 
     TreeNode_t *new_node = (TreeNode_t *) calloc(1, sizeof(TreeNode_t));
     if (new_node == NULL)
@@ -110,8 +112,7 @@ int InsertTreeElement(Tree_t *tree, TreeElem_t new_value) {
     new_node->parent = curr_parent_node;
     (tree->nodes_count)++;
 
-    // Return_If_Tree_Error
-    return NoTreeError;
+    Return_Tree_Error(tree);
 }
 
 

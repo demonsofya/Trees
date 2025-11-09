@@ -1,6 +1,29 @@
 #ifndef TREE_DUMP_H_INCLUDED
 #define TREE_DUMP_H_INCLUDED
 
+//=============================================================================
+
+
+#define Return_If_Tree_Error(tree)                                  \
+    {                                                               \
+        int error = TreeVerify(tree);                               \
+        if (error != 0) {                                           \
+            TreeDump(tree, __FILE__, __FUNCTION__, __LINE__);       \
+            return error;                                           \
+        }                                                           \
+    }
+
+#define Return_Tree_Error(tree)                                     \
+    {                                                               \
+        int error = TreeVerify(tree);                               \
+        if (error != 0)                                             \
+            TreeDump(tree, __FILE__, __FUNCTION__, __LINE__);       \
+        return error;                                               \
+    }
+
+//-----------------------------------------------------------------------------
+
+
 enum TreeErrors {
     NoTreeError     = 0,
     TreePtrError    = 1 << 0,
