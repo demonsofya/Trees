@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "tree_sort.h"
+#include "tree_dump.h"
 
 int main()
 {
@@ -13,6 +14,16 @@ int main()
     root = {10, &vertex_5, &vertex_20, NULL};
 
     Tree_t tree = {&root};
+
+    PrintTreeElements(&tree);
+    fprintf(OUTPUT_FILE, "\n");
+
+    InsertTreeElement(&tree, 15);
+    InsertTreeElement(&tree, 16);
+    InsertTreeElement(&tree, 13);
+    InsertTreeElement(&tree, 6);
+
+    TreeDump(&tree, __FILE__, __FUNCTION__, __LINE__, "DUMP FROM MAIN");
 
     PrintTreeElements(&tree);
 

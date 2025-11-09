@@ -1,0 +1,33 @@
+#ifndef TREE_DUMP_H_INCLUDED
+#define TREE_DUMP_H_INCLUDED
+
+enum TreeErrors {
+    NoTreeError     = 0,
+    TreePtrError    = 1 << 0,
+    RootPtrError    = 1 << 1,
+    NodePtrError    = 1 << 2,
+    SizeTreeError   = 1 << 3
+};
+
+FILE* OpenLogFile();
+void CloseLogFile();
+
+int TreeVerify(Tree_t *tree);
+void TreeDump(Tree_t *tree, const char *file_name, const char *function_name,
+              int line_number, const char *calling_reason_string);
+
+void TreeDumpPrintErrors(Tree_t *tree, const char *file_name, const char *function_name,
+              int line_number, const char *calling_reason_string);
+
+void TreeDumpCreateGraphFile(Tree_t *tree);
+char *CreateDotFileName(const char *file_type);
+
+void PrintDotFileHeader(FILE *dot_file_ptr, char *DotFilePngName);
+int DrawDotNode(const TreeNode_t *node, FILE *dot_file_ptr, int rank_num, int node_num);
+void PrintDotFileEnd(FILE *dot_file_ptr);
+
+void CreateImageFromDotFile(char *DotFileName, char *DotFilePngName);
+
+char *GetNodeName(int node_num);
+
+#endif // TREE_DUMP_H_INCLUDED
